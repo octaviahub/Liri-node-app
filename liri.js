@@ -121,8 +121,37 @@ const trigger = function() {
 	});
 };
 
+// Switch method for multiple commands
 
+const current = function(caseData, functionData) {
+	switch (caseData) {
+		case "my-tweets": 
+			generateTweets();
+			break;
+		case "spotify-this-song":
+			generateSongs(functionData);
+			break;
+		case "movie-this": 
+			generateMovie(functionData);
+			break;
+		case "do-what-it-says":
+			trigger();
+			break;
+		default: 
+			console.log("Sorry, LIRI does not know that. Please try again.");
 
+	}
+};
+
+// takes in command line arguments, and executes them
+
+const runThis = function(argOne, argTwo) {
+  pick(argOne, argTwo);
+};
+
+// MAIN PROCESS
+// =====================================
+runThis(process.argv[2], process.argv[3]);
 // request("https://twitter.com/WigQueen_?t=", function(error, response, body){
 
 // iff(!error && response.statusCode === 200) {
