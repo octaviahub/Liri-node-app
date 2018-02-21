@@ -3,10 +3,6 @@
 
 require("dotenv").config();
 
-
-
-
-
 ///Importing dependencies and NPM packages 
 
 const Spotify = require("node-spotify-api");
@@ -26,6 +22,7 @@ const generateTweets = function() {
 	const info = {
 		handle: "wigqueen_"
 	};
+
 	client.get("statuses/user_timeline", info function(error, tweets, response) {
 		if (!error) {
 			for (let i = 0; i <tweets.length; i++) {
@@ -36,6 +33,44 @@ const generateTweets = function() {
 		}
 
 	});
+};
+
+// prints to log.txt
+const generateArtist = function(artist) {
+	return.artist.name;
+};
+
+// Spotify song search 
+
+const generateSongs = function(song) {
+	if (song === undefined) {
+		song = "Sorry, I don't recall that slowjam";
+	}
+
+	spotify.search(
+	{
+		type: "track", 
+		query: song
+	},
+	function(err, data) {
+		if (err) {
+			console.log("We are having some trouble right now" + err);
+			return;
+			}
+			const songs = data.tracks.items;
+
+			for(let i = 0; i < songs.length; i++) {
+				console.log(i);
+				console.log("artist(s)" : + songs[i].artists.map(generateArtist));
+				console.log("title: " + songs[i].title);
+				console.log("preview song: " + songs[i].preview_url);
+				console.log("album: " + songs[i].album.name);
+				console.log("------------------------------------");
+
+			}
+
+		}
+	);
 };
 
 // request("https://twitter.com/WigQueen_?t=", function(error, response, body){
