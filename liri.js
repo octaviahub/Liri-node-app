@@ -12,7 +12,6 @@ const fs = require("fs");
 const request = require("request");
 
 
-const spotify = new Spotify(keys.spotify);
 
 //creating search for tweets 
 
@@ -23,9 +22,9 @@ const generateTweets = function() {
 		handle: "wigqueen_"
 	};
 
-	client.get("statuses/user_timeline", info function(error, tweets, response) {
+	client.get("statuses/user_timeline", info, function(error, tweets, response) {
 		if (!error) {
-			for (let i = 0; i <tweets.length; i++) {
+			for (let i = 0; i < tweets.length; i++) {
 				console.log(tweets[i].created_at);
 				console.log("Here's a rundown of your latest tweets:");
 				console.log(tweets[i].text);
@@ -35,12 +34,15 @@ const generateTweets = function() {
 	});
 };
 
+
+
 // prints to log.txt
 const generateArtist = function(artist) {
-	return.artist.name;
+	return artist.name;
 };
 
 // Spotify song search 
+const spotify = new Spotify(keys.spotify);
 
 const generateSongs = function(song) {
 	if (song === undefined) {
@@ -54,14 +56,14 @@ const generateSongs = function(song) {
 	},
 	function(err, data) {
 		if (err) {
-			console.log("We are having some trouble right now" + err);
+			console.log("The Sign" + err);
 			return;
 			}
 			const songs = data.tracks.items;
 
 			for(let i = 0; i < songs.length; i++) {
 				console.log(i);
-				console.log("artist(s)" : + songs[i].artists.map(generateArtist));
+				console.log("artist(s) : " + songs[i].artists.map(generateArtist));
 				console.log("title: " + songs[i].title);
 				console.log("preview song: " + songs[i].preview_url);
 				console.log("album: " + songs[i].album.name);
@@ -78,7 +80,7 @@ const generateSongs = function(song) {
 
 const generateMovie = function(movieTitle) {
 	if (movieTitle === undefined) {
-		movieTitle = "Grab some popcorn while we search for that...";
+		movieTitle = "Mr. Nobody";
 }
 
 const movieLink = "http://www.omdbapi.com/?t=" + movieTitle + "&y=&plot=full&tomatoes=true&apikey=trilogy";
@@ -149,9 +151,10 @@ const runThis = function(argOne, argTwo) {
   pick(argOne, argTwo);
 };
 
-// MAIN PROCESS
-// =====================================
+
 runThis(process.argv[2], process.argv[3]);
+
+
 // request("https://twitter.com/WigQueen_?t=", function(error, response, body){
 
 // iff(!error && response.statusCode === 200) {
