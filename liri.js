@@ -78,7 +78,7 @@ const generateSongs = function(song) {
 
 const generateMovie = function(movieTitle) {
 	if (movieTitle === undefined) {
-		movieTitle = "May want to grab some popcorn while we search for that...";
+		movieTitle = "Grab some popcorn while we search for that...";
 }
 
 const movieLink = "http://www.omdbapi.com/?t=" + movieTitle + "&y=&plot=full&tomatoes=true&apikey=trilogy";
@@ -100,6 +100,28 @@ const movieLink = "http://www.omdbapi.com/?t=" + movieTitle + "&y=&plot=full&tom
 
 	});
 };
+
+// function for taking commands from text file
+
+const trigger = function() {
+	fs.readFile("random.txt", "utf8", function(error, data) {
+		console.log(data);
+
+		const dataArr = data.split(",");
+
+		if (dataArr.length === 2) {
+			pick(dataArr[0], dataArr[1]);
+
+		}
+		else if (dataArr.length === 1) {
+			pick(dataArr[0]);
+
+		}
+
+	});
+};
+
+
 
 // request("https://twitter.com/WigQueen_?t=", function(error, response, body){
 
