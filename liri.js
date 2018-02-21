@@ -73,6 +73,34 @@ const generateSongs = function(song) {
 	);
 };
 
+
+// Ombd Movie Search 
+
+const generateMovie = function(movieTitle) {
+	if (movieTitle === undefined) {
+		movieTitle = "May want to grab some popcorn while we search for that...";
+}
+
+const movieLink = "http://www.omdbapi.com/?t=" + movieTitle + "&y=&plot=full&tomatoes=true&apikey=trilogy";
+
+	request(movieLink, function(error, response, body) {
+		if (!error && response.statusCode === 200) {
+			const jsonData = JSON.parse(body);
+
+			console.log("Title: " + jsonData.Title);
+      		console.log("Year: " + jsonData.Year);
+      		console.log("Rated: " + jsonData.Rated);
+      		console.log("IMDB Rating: " + jsonData.imdbRating);
+      		console.log("Country: " + jsonData.Country);
+      		console.log("Language: " + jsonData.Language);
+      		console.log("Plot: " + jsonData.Plot);
+      		console.log("Actors: " + jsonData.Actors);
+      		console.log("Rotton Tomatoes Rating: " + jsonData.Ratings[1].Value);
+		}
+
+	});
+};
+
 // request("https://twitter.com/WigQueen_?t=", function(error, response, body){
 
 // iff(!error && response.statusCode === 200) {
