@@ -12,7 +12,6 @@ const fs = require("fs");
 const request = require("request");
 
 
-
 //creating search for tweets 
 
 const generateTweets = function() {
@@ -20,7 +19,7 @@ const generateTweets = function() {
 
 	const info = {
 		handle: "wigqueen_"
-	};
+	}; 
 
 	client.get("statuses/user_timeline", info, function(error, tweets, response) {
 		if (!error) {
